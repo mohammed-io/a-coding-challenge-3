@@ -30,4 +30,6 @@
 #  index_airports_on_name                    (name)
 #
 class Airport < ApplicationRecord
+  scope :by_country, -> country { country.presence ? where(country: country) : self }
+  scope :order_by_size, -> { order(passenger_volume: :desc)}
 end
