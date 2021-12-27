@@ -24,12 +24,14 @@
 #
 # Indexes
 #
+#  index_airports_on_country_alpha2          (country_alpha2)
 #  index_airports_on_iata                    (iata) UNIQUE
 #  index_airports_on_iata_and_icao_and_name  (iata,icao,name)
 #  index_airports_on_icao                    (icao)
 #  index_airports_on_name                    (name)
+#  index_airports_on_passenger_volume        (passenger_volume)
 #
 class Airport < ApplicationRecord
-  scope :by_country, -> country { country.presence ? where(country: country) : self }
+  scope :by_country, -> country { country.presence ? where(country_alpha2: country) : self }
   scope :order_by_size, -> { order(passenger_volume: :desc)}
 end

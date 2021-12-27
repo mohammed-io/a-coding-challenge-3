@@ -23,6 +23,7 @@ gem 'amazing_print'
 gem 'oj'
 gem 'oj_mimic_json'
 gem 'webmock'
+gem 'countries'
 
 # api
 gem 'api-pagination'
