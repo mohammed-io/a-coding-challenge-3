@@ -4,6 +4,8 @@ default: &default
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 8 } %>
   host: localhost
   timeout: 5000
+  username: <%= Rails.application.credentials.db_username %>
+  password: <%= Rails.application.credentials.db_password %>
   variables:
     statement_timeout: <%= ENV["DB_STATEMENT_TIMEOUT"] || 120_000 %>
 
