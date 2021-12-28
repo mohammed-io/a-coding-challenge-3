@@ -16,18 +16,29 @@ RSpec.describe 'API::V1::AirportsController', type: :request do
         airports_request
 
         expect(response.status).to eq(200)
-        expect(json.size).to eq(1)
+        expect(JSON.parse(json[:data]).size).to eq(1)
       end
     end
 
     context "unfiltered" do
-      subject(:airports_request) { json_get api_v1_airports_url}
+      subject(:airports_request) { json_get api_v1_airports_url }
 
       it 'returns airports', :aggregate_failures do
         airports_request
 
         expect(response.status).to eq(200)
-        expect(json.size).to eq(6)
+        expect(JSON.parse(json[:data]).size).to eq(6)
+      end
+    end
+
+    context "paginated" do
+      subject(:airports_request) { json_get api_v1_airports_url, params: {per_page: 1} }
+
+      it 'returns airports', :aggregate_failures do
+        airports_request
+
+        expect(response.status).to eq(200)
+        expect(JSON.parse(json[:data]).size).to eq(1)
       end
     end
   end
